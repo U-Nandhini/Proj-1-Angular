@@ -1,0 +1,63 @@
+<nav class="navbar navbar -light">
+  <div class="container fluid">
+    <h1>USER DETAILS</h1>
+    <form class="d-flex">
+      <div class="search-hero">
+        <input
+          class="form-control"
+          type="text"
+          name="search"
+          [(ngModel)]="searchText"
+          autocomplete="off"
+          placeholder=" Start searching"
+        />
+      </div>
+    </form>
+    <div class="d-flex">
+      <button class="btn btn-success mx-2" routerLink="/addUser">
+        ADD USER
+      </button>
+
+      <button
+        id="logoutModal"
+        class="btn btn-danger mx-2"
+      
+        (click)="logOut()"
+      >
+        LOGOUT
+      </button>
+    </div>
+  </div>
+</nav>
+
+<table class="table mt-3" id="mytable">
+  <thead>
+    <th scope="col">Id</th>
+    <th scope="col">FullName</th>
+    <th scope="col">Email ID</th>
+    <th scope="col">Mobile number</th>
+    <th scope="col">Password</th>
+    <th scope="col">Action</th>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let item of data | searchFilter: searchText">
+      <td>{{ item.id }}</td>
+      <td>{{ item.Name }}</td>
+
+      <td>{{ item.Email }}</td>
+      <td>{{ item.Mobile }}</td>
+      <td>{{ item.Password }}</td>
+
+      <td>
+        <button class="btn btn-primary">
+          <fa-icon [icon]="edit" routerLink="/update/{{ item.id }}"></fa-icon>
+        </button>
+
+        <button class="btn btn-danger mx-2" (click)="deleteUser(item)">
+          <fa-icon [icon]="delete"></fa-icon>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
